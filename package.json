@@ -1,0 +1,19 @@
+{
+  "name": "chemax",
+  "version": "0.1.0",
+  "description": "AI-powered game console — Claude Code skills for game cheats and commands",
+  "scripts": {
+    "install": "bash install.sh",
+    "install:fallout4": "bash install.sh fallout4"
+  },
+  "keywords": [
+    "claude-code",
+    "agent-skills",
+    "game-cheats",
+    "console-commands",
+    "fallout4",
+    "skyrim",
+    "ai-gaming"
+  ],
+  "license": "MIT"
+}

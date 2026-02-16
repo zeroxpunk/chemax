@@ -33,22 +33,15 @@ That's it. Open Claude Code and start talking:
 > give me full X-01 power armor
 ```
 
-First time, Claude auto-detects your game install and sets up the injector. After that, commands go straight to the game.
+First time, Claude auto-detects your game install and sets everything up. After that, commands go straight to the game.
 
 ## How It Works
 
 1. You type a request in Claude Code
 2. Claude translates it to console commands using the game skill (item IDs, command syntax, etc.)
-3. `inject_command.py` uses [pymem](https://github.com/srounet/Pymem) to call the game's internal `TESScript::CompileAndRun` directly in memory
-4. The command executes instantly -- no keystrokes, no console window, no alt-tab
+3. The skill executes the command in-game (method varies per game)
 
-### Requirements
-
-- Python 3.x with `pymem` and `keystone-engine`
-
-```bash
-pip install pymem keystone-engine
-```
+Each game skill handles delivery differently -- memory injection for Bethesda titles, RCON for Source games, etc.
 
 ## Add Your Own Game
 
@@ -67,7 +60,7 @@ allowed-tools: Bash(bash *), Bash(powershell *), Read, Grep
 Add:
 - `references/commands.md` -- command reference
 - `references/items.json` -- item name-to-ID database
-- `scripts/inject_command.py` -- memory injection script
+- `scripts/` -- game-specific command delivery scripts
 - `scripts/setup.ps1` -- finds game directory, saves config
 
 See `chemax-fallout4` for a complete example.

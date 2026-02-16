@@ -1,4 +1,4 @@
-# chemax — Fallout 4 setup (Windows)
+﻿# chemax — Fallout 4 setup (Windows)
 # Run once after install. Finds the game, installs the bridge, saves config.
 #
 # Usage: powershell -File setup.ps1
@@ -133,7 +133,8 @@ Write-Host ""
 Write-Host "how to use:" -ForegroundColor Cyan
 Write-Host "  1. launch Fallout 4"
 Write-Host "  2. open Claude Code and type what you want"
-Write-Host "  3. alt-tab back to the game — it's already done"
+Write-Host "  3. alt-tab back to the game - it's already done"
 Write-Host ""
 
-& $bridgeScript
+Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$bridgeScript`"" -WindowStyle Minimized
+Write-Host "bridge started in background" -ForegroundColor Green

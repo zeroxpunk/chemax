@@ -101,12 +101,12 @@ For multiple commands, call once per command.
 ### Inventory
 | Request | Command |
 |---------|---------|
-| give caps/money | `player.additem f <amount>` |
+| give caps/money | `player.additem 0000000f <amount>` |
 | give item | `player.additem <formID> <qty>` |
 | remove item | `player.removeitem <formID> <qty>` |
-| bobby pins | `player.additem a <amount>` |
-| stimpaks | `player.additem 23736 <amount>` |
-| fusion cores | `player.additem 75FE4 <amount>` |
+| bobby pins | `player.additem 0000000a <amount>` |
+| stimpaks | `player.additem 00023736 <amount>` |
+| fusion cores | `player.additem 00075FE4 <amount>` |
 | add perk | `player.addperk <perkID>` |
 
 ### World

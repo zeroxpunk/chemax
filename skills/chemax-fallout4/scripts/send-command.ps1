@@ -1,4 +1,4 @@
-# chemax — Fallout 4 send command (Windows)
+﻿# chemax — Fallout 4 send command (Windows)
 # Reads config from setup, sends command via the configured bridge.
 #
 # Usage: powershell -File send-command.ps1 "player.additem f 1000"

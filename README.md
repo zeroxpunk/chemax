@@ -1,6 +1,6 @@
 # chemax
 
-AI game console for [Claude Code](https://claude.ai/code). Type what you want in English — it runs in-game.
+AI game console for [Claude Code](https://claude.ai/code). Type what you want in English -- it runs in-game.
 
 ```
 you:   "give me infinite carry weight"
@@ -33,15 +33,22 @@ That's it. Open Claude Code and start talking:
 > give me full X-01 power armor
 ```
 
-First time, Claude auto-detects your game install and sets up the bridge. After that, commands go straight to the game.
+First time, Claude auto-detects your game install and sets up the injector. After that, commands go straight to the game.
 
 ## How It Works
 
 1. You type a request in Claude Code
 2. Claude translates it to console commands using the game skill (item IDs, command syntax, etc.)
-3. `send-command` writes commands to a file in the game directory
-4. `bridge.ps1` (running in background) watches the file and auto-types commands into the game via SendInput
-5. You alt-tab back — it's done
+3. `inject_command.py` uses [pymem](https://github.com/srounet/Pymem) to call the game's internal `TESScript::CompileAndRun` directly in memory
+4. The command executes instantly -- no keystrokes, no console window, no alt-tab
+
+### Requirements
+
+- Python 3.x with `pymem` and `keystone-engine`
+
+```bash
+pip install pymem keystone-engine
+```
 
 ## Add Your Own Game
 
@@ -58,11 +65,10 @@ allowed-tools: Bash(bash *), Bash(powershell *), Read, Grep
 ```
 
 Add:
-- `references/commands.md` — command reference
-- `references/items.json` — item name-to-ID database
-- `scripts/send-command.ps1` — writes commands to batch file
-- `scripts/setup.ps1` — finds game directory, saves config
-- `scripts/bridge.ps1` — watches file, sends keystrokes to game
+- `references/commands.md` -- command reference
+- `references/items.json` -- item name-to-ID database
+- `scripts/inject_command.py` -- memory injection script
+- `scripts/setup.ps1` -- finds game directory, saves config
 
 See `chemax-fallout4` for a complete example.
 

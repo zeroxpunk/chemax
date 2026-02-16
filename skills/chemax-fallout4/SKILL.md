@@ -17,42 +17,23 @@ them in-game.
 
 ## Auto-Setup
 
-On first use, check if `~/.chemax/fallout4.json` exists. If not, run setup
-automatically — do NOT ask the user to do it manually:
+On first use, ensure `pymem` is installed. Check once and install if missing:
 
-**Windows:**
-```powershell
-powershell -ExecutionPolicy Bypass -File "$HOME\.claude\skills\chemax-fallout4\scripts\setup.ps1"
-```
-
-**macOS / Linux / WSL:**
 ```bash
-bash ~/.claude/skills/chemax-fallout4/scripts/setup.sh
+pip show pymem > /dev/null 2>&1 || pip install pymem
 ```
 
-Setup auto-detects Fallout 4 across Steam, GOG, Epic, Xbox, and custom
-locations on all drives. If it can't find the game, ask the user for the path
-and pass it via `CHEMAX_FO4_GAME_DIR`.
-
-Setup also starts `bridge.ps1` which watches for commands and auto-sends them
-to the game. If bridge is not running, start it:
-```powershell
-Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$HOME\.claude\skills\chemax-fallout4\scripts\bridge.ps1`"" -WindowStyle Minimized
-```
+Fallout 4 must be running before sending commands. The injector attaches
+directly to the `Fallout4.exe` process — no bridge, no clipboard, no bat files.
 
 ## Sending Commands
 
-After setup, send commands by calling the send-command script. The bridge
-picks them up and types them into the game console automatically.
+Send commands using `inject_command.py`, which writes directly into Fallout 4's
+memory via pymem. The game must be running. Run as admin if needed for process
+access.
 
-**Windows:**
-```powershell
-powershell -ExecutionPolicy Bypass -File "$HOME\.claude\skills\chemax-fallout4\scripts\send-command.ps1" "<command>"
-```
-
-**macOS / Linux / WSL:**
 ```bash
-bash ~/.claude/skills/chemax-fallout4/scripts/send-command.sh "<command>"
+python "$HOME/.claude/skills/chemax-fallout4/scripts/inject_command.py" "<command>"
 ```
 
 For multiple commands, call once per command.
@@ -154,8 +135,7 @@ For multiple commands, call once per command.
 ## Item Lookup
 
 When the user asks for an item by name, search [references/items.json](references/items.json)
-using the Grep tool or Read tool. The file is at:
-- `~/.claude/skills/chemax-fallout4/references/items.json`
+using the Grep tool or Read tool.
 
 The file has entries: `{"id": "HEX", "name": "Name", "type": "category"}`
 Use the hex ID with: `player.additem <id> <quantity>`
